@@ -1,10 +1,13 @@
 export default class Card {
-    constructor(rank, suit) {
+    rank: string;
+    suit: string;
+
+    constructor(rank: string, suit: string) {
         this.rank = rank;
         this.suit = suit;
     }
 
-    toString() {
+    toString(): string {
         return `${this.rank} of ${this.suit}`;
     }
 }

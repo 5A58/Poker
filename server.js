@@ -1,7 +1,7 @@
-import { dirname } from 'path';
+import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-import Express from 'express';
+import express from 'express';
 
 // Environment variables
 dotenv.config();
@@ -11,12 +11,14 @@ const port = process.env.PORT;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Express config
-const app = Express();
+const app = express();
+app.use(express.static(join(__dirname, 'client')));
+app.use('/dist', express.static(join(__dirname, 'dist')));
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back the index.html file
 app.get('*', (req, res) => {
-    res.sendFile('/client/index.html', { root: __dirname });
+    // res.sendFile('/client/index.html', { root: __dirname });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

@@ -9,3 +9,6 @@ node_modules/
 
 # Test files
 http.rest
+
+# Output files
+dist
