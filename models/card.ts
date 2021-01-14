@@ -7,6 +7,12 @@ export default class Card {
         this.suit = suit;
     }
 
+
+    /**
+     * Get the string equivalent of a card
+     *
+     * @return {string} Card as a string
+     */
     toString(): string {
         return `${this.rank} of ${this.suit}`;
     }

@@ -14,7 +14,11 @@ export default class Deck {
         this.shuffle();
     }
 
-    // The modern version of the Fisher–Yates shuffle
+
+    /**
+     * Randomly reorder the deck of card
+     * Uses the modern version of the Fisher–Yates shuffle
+     */
     private shuffle(): void {
         for (let i = this.cards.length - 1; i > 0; i--) {
             // Random integer such that 0 ≤ j ≤ i
@@ -27,6 +31,12 @@ export default class Deck {
         }
     }
 
+
+    /**
+     * Return the next card in the deck
+     *
+     * @return {Card} The next card in the deck
+     */
     draw(): Card {
         let card = this.cards.pop();
         if (card !== undefined) {
@@ -35,6 +45,12 @@ export default class Deck {
         throw new Error('A card could not be drawn. The deck is empty.');
     }
 
+
+    /**
+     * Return the number of cards remaining in the deck
+     *
+     * @return {number} Number of cards in the deck
+     */
     count(): number {
         return this.cards.length;
     }
