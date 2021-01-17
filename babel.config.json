@@ -1,0 +1,19 @@
+{
+    "plugins": [
+        [
+            "@babel/plugin-transform-react-jsx",
+            {
+                "pragma": "h",
+                "pragmaFrag": "Fragment"
+            }
+        ],
+        "@babel/plugin-proposal-class-properties"
+    ],
+    "only": [
+        "./client/scripts"
+    ],
+    "ignore": [
+        "./client/scripts/vendor",
+        "./node_modules"
+    ]
+}
