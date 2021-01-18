@@ -12,7 +12,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Express config
 const app = express();
-app.use(express.static(join(__dirname, 'dist/client')));
+app.use(express.static(join(__dirname, 'client/build')));
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back the index.html file

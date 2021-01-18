@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
     /* Basic Options */
-    "target": "es6",
-    "module": "es6",
+    "target": "es5",
+    "module": "esnext",
     "lib": [
       "dom",
-      "dom.iterable",
-      "es6",
+      "es5",
       "scripthost"
     ],
     // "sourceMap": true,                     /* Generates corresponding '.map' file. */

@@ -11,3 +11,14 @@ html {
     font-size: 62.5%; /* 1 rem = 10px; 10px/16px = 62.5% */
     box-sizing: border-box;
 }
+
+.card {
+    height:25rem;
+    border: 2px solid transparent;
+    border-radius: 1.1rem;
+    transition: border-color 0.3s ease;
+}
+
+.card:hover {
+    border: 2px solid red;
+}
