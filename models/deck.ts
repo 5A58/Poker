@@ -1,17 +1,19 @@
-import { RANKS, SUITS } from './constants.js';
-import Card from './card.js';
+import { RANKS, SUITS } from './constants';
+import Card from './card';
 
 export default class Deck {
     private cards: Array<Card>
 
-    constructor() {
+    constructor(shuffle: boolean = true) {
         this.cards = [];
 
         RANKS.forEach(rank =>
             SUITS.forEach(suit =>
                 this.cards.push(new Card(rank, suit))));
 
-        this.shuffle();
+        if (shuffle) {
+            this.shuffle();
+        }
     }
 
 
@@ -35,14 +37,10 @@ export default class Deck {
     /**
      * Return the next card in the deck
      *
-     * @return {Card} The next card in the deck
+     * @return {Card} The next card in the deck or undefined if empty
      */
-    draw(): Card {
-        let card = this.cards.pop();
-        if (card !== undefined) {
-            return card;
-        }
-        throw new Error('A card could not be drawn. The deck is empty.');
+    draw(): Card | undefined {
+        return this.cards.pop();
     }
 
 

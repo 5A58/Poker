@@ -16,4 +16,14 @@ export default class Card {
     toString(): string {
         return `${this.rank} of ${this.suit}`;
     }
+
+
+    /**
+     * Get short name to use for rendering assets (e.g. 2H for 2 of hearts)
+     *
+     * @return {string} Short name of card 
+     */
+    getShortName(): string {
+        return `${this.rank}${this.suit.charAt(0).toUpperCase()}`;
+    }
 }

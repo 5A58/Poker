@@ -1,4 +1,4 @@
-import Hand from './hand.js';
+import Hand from './hand';
 
 export default class Player {
     id: string

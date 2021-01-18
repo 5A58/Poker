@@ -1,6 +1,6 @@
-import Deck from './deck.js';
-import Player from './player.js';
-import Card from './card.js';
+import Deck from './deck';
+import Player from './player';
+import Card from './card';
 
 export default class Table {
     deck: Deck;
