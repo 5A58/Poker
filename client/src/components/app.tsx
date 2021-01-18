@@ -1,9 +1,12 @@
-import { h, render, Component } from 'preact';
-import CardComponent from './cardComponent';
+import { h, Component } from 'preact';
+import CardComponent from './card';
 
-class App extends Component<{}, {}> {
+class App extends Component {
     render() {
-        return <div><CardComponent name='KS' /></div>;
+        return <div>
+            <CardComponent name="AS" />
+            <CardComponent />
+        </div>;
     }
 }
 
