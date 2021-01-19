@@ -1,6 +1,7 @@
 .card {
     height:25rem;
-    width: calc(25rem * 0.725);
+    width: calc(25rem * 0.725);    
+    background-color: white;
     border: 2px solid black;
     margin-right: 1rem;
     border-radius: 1.1rem;
@@ -9,4 +10,8 @@
 
 .card:hover {
     border: 2px solid lightgray;
+}
+
+.back {
+    padding: 0.8rem 0;
 }

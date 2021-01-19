@@ -17,7 +17,7 @@ app.use(express.static(join(__dirname, 'client/build')));
 // The "catchall" handler: for any request that doesn't
 // match one above, send back the index.html file
 app.get('*', (req, res) => {
-    // res.sendFile('/client/index.html', { root: __dirname });
+    res.sendFile(join(__dirname, 'client', 'build', 'index.html'));
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

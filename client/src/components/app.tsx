@@ -1,25 +1,25 @@
 import { h, Component } from 'preact';
-import CardComponent from './card';
-import Deck from '../../../models/deck';
-import Card from '../../../models/card';
+import { Route, Router, RouterOnChangeArgs } from "preact-router";
 
-class App extends Component {
+import Home from "../routes/home/home";
+import Game from "../routes/game/game";
+
+type AppState = {
+    currentUrl: string
+};
+
+class App extends Component<{}, AppState> {
+    handleRoute = (e: RouterOnChangeArgs) => {
+        this.setState({ currentUrl: e.url })
+    };
+
     render() {
-        let deck = new Deck(false);
-        let cards: Array<Card> = [];
-        let card: Card | undefined = deck.draw();
-        while (card !== undefined) {
-            console.log("Drew " + card.toString());
-            cards.push(card);
-            card = deck.draw();
-        }
-
-        return <div>
-            {cards.map(card => {
-                return <CardComponent name={card.getShortName()} />
-            })}
-            <CardComponent />
-        </div>;
+        return <div id="app">
+            <Router onChange={this.handleRoute}>
+                <Route path="/" component={Home} />
+                <Route path="/:id" component={Game} />
+            </Router>
+        </div>
     }
 }
 

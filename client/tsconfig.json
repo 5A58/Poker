@@ -12,7 +12,7 @@
         "jsx": "react",
         "jsxFactory": "h",
         // "outDir": "./dist",
-        "rootDir": "./",
+        "rootDir": "../",
         "removeComments": true,
         "noEmitOnError": true,
         /* Strict Type-Checking Options */
