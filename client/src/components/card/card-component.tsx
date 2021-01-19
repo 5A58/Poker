@@ -1,8 +1,10 @@
 import { h, Component } from 'preact';
-import style from "./card.css";
+import style from './card.scss';
 
 type CardProps = {
     name?: string;
+    pocketCard?: boolean;
+    display?: boolean;
 };
 
 class CardComponent extends Component<CardProps> {
@@ -10,10 +12,12 @@ class CardComponent extends Component<CardProps> {
         super(props);
     }
 
-    render() {
-        let path = `../../assets/${this.props.name ?? 'back'}.svg`;
+    render({ name = 'back', pocketCard = false, display = true }: CardProps) {
+        let path = `../../assets/${name}.svg`;
         let classes = [style.card];
-        if (this.props.name === undefined) classes.push(style.back);
+        if (display === false) classes.push(style.hide);
+        if (pocketCard === true) classes.push(style.pocket);
+        if (name === undefined) classes.push(style.back);
         return <img src={path} class={classes.join(' ')}></img>;
     }
 }

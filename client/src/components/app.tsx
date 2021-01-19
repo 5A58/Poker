@@ -1,8 +1,8 @@
 import { h, Component } from 'preact';
-import { Route, Router, RouterOnChangeArgs } from "preact-router";
+import { Route, Router, RouterOnChangeArgs } from 'preact-router';
 
-import Home from "../routes/home/home";
-import Game from "../routes/game/game";
+import Home from '../routes/home/home';
+import Game from '../routes/game/game';
 
 type AppState = {
     currentUrl: string

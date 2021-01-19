@@ -5,11 +5,11 @@ export default class Player {
     chips: number
     hand: Hand | undefined
 
-    constructor() {
-        this.id = '1';
-        this.chips = 0;
+    constructor(id: string, chips: number) {
+        this.id = id;
+        this.chips = chips;
+        this.hand = undefined;
     }
-
 
     /**
      * Set the player's hand
@@ -19,7 +19,6 @@ export default class Player {
     setHand(hand: Hand): void {
         this.hand = hand;
     }
-
 
     /**
      * Fold the current hand
@@ -37,7 +36,6 @@ export default class Player {
         return this.chips;
     }
 
-
     /**
      * Add chips to the player's bankroll
      *
@@ -46,7 +44,6 @@ export default class Player {
     addChips(chips: number): void {
         this.chips += chips
     }
-
 
     /**
      * Remove chips from the player's bankroll

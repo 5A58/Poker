@@ -39,8 +39,10 @@ export default class Deck {
      *
      * @return {Card} The next card in the deck or undefined if empty
      */
-    draw(): Card | undefined {
-        return this.cards.pop();
+    draw(): Card {
+        let card = this.cards.pop();
+        if (card !== undefined) return card;
+        throw new Error('Cannot draw any more cards. Deck is empty.');
     }
 
 

@@ -1,6 +1,7 @@
 import Deck from './deck';
 import Player from './player';
 import Card from './card';
+import Hand from './hand';
 
 export default class Table {
     deck: Deck;
@@ -9,8 +10,8 @@ export default class Table {
     pots: Array<number>;
 
     constructor() {
-        this.deck = new Deck();
         this.players = [];
+        this.deck = new Deck(true);
         this.communityCards = [];
         this.pots = [];
     }
@@ -51,8 +52,40 @@ export default class Table {
      * Reset the table after a round
      */
     resetTable(): void {
-        this.deck = new Deck();
+        this.deck = new Deck(true);
         this.communityCards = [];
         this.pots = [];
+        this.players.forEach(player => player.foldHand());
+    }
+
+
+    /**
+     * Deal two cards to all of the players at the table
+     */
+    dealCards(): void {
+        this.players.forEach(player => {
+            player.setHand(new Hand(this.deck.draw(), this.deck.draw()));
+        });
+    }
+
+
+    /**
+     * Reveal the next community cards in the game sequence (i.e. flop, turn, river)
+     */
+    revealCards(): void {
+        let cardsRevealed: number = this.communityCards.length;
+        if (cardsRevealed >= 5) {
+            throw new Error('5 cards have already been revealed. The table need to be reset');
+        }
+        else if (cardsRevealed >= 3) {
+            // The turn or river
+            this.communityCards.push(this.deck.draw());
+        }
+        else {
+            // Flop
+            for (let i = 0; i < 3; i++) {
+                this.communityCards.push(this.deck.draw());
+            }
+        }
     }
 }

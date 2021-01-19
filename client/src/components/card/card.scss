@@ -1,6 +1,6 @@
 .card {
-    height:25rem;
-    width: calc(25rem * 0.725);    
+    height: 10%;
+    width: 15%;
     background-color: white;
     border: 2px solid black;
     margin-right: 1rem;
@@ -14,4 +14,13 @@
 
 .back {
     padding: 0.8rem 0;
+}
+
+.card.pocket {
+    height: 25rem;
+    width: calc(25rem * 0.725);
+}
+
+.hide {
+    visibility: hidden;
 }

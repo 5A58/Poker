@@ -1,9 +1,12 @@
-import { h, Component } from 'preact';
-
+import { h, Component, Fragment } from 'preact';
+import style from './home.scss';
 
 class Home extends Component {
     render() {
-        return <div>Pickup Poker Home Page</div>;
+        return <Fragment>
+            <h1>Pickup Poker Home Page</h1>
+            <a href="/123" class={style.button}>Play</a>
+        </Fragment>;
     }
 }
 
