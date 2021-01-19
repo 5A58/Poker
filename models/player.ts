@@ -1,14 +1,16 @@
 import Hand from './hand';
 
 export default class Player {
-    id: string
-    chips: number
-    hand: Hand | undefined
+    id: string;
+    chips: number;
+    hand: Hand | undefined;
+    amountBet: number;
 
     constructor(id: string, chips: number) {
         this.id = id;
         this.chips = chips;
         this.hand = undefined;
+        this.amountBet = 0;
     }
 
     /**

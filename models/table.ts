@@ -55,7 +55,10 @@ export default class Table {
         this.deck = new Deck(true);
         this.communityCards = [];
         this.pots = [];
-        this.players.forEach(player => player.foldHand());
+        this.players.forEach(player => {
+            player.foldHand();
+            player.amountBet = 0;
+        });
     }
 
 
