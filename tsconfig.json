@@ -6,7 +6,8 @@
     "lib": [
       "dom",
       "es5",
-      "scripthost"
+      "scripthost",
+      "es2017.object"
     ],
     // "sourceMap": true,                     /* Generates corresponding '.map' file. */
     // "outFile": "./",                       /* Concatenate and emit output to single file. */

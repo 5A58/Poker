@@ -1,28 +1,35 @@
-import Deck from './deck';
-import Player from './player';
-import Card from './card';
-import Hand from './hand';
+import Deck from './deck.js';
+import Player from './player.js';
+import Card from './card.js';
+import Hand from './hand.js';
 
-export default class Table {
+class Table {
     deck: Deck;
     players: Array<Player>;
     communityCards: Array<Card>;
     pots: Array<number>;
+    startingChips: number;
+    bigBlind: number;
+    smallBlind: number;
 
     constructor() {
         this.players = [];
         this.deck = new Deck(true);
         this.communityCards = [];
         this.pots = [];
+        // Hardcoding until settings are implemented
+        this.startingChips = 100;
+        this.bigBlind = Math.round(this.startingChips / 50);
+        this.smallBlind = Math.round(this.startingChips / 100);
     }
 
     /**
      * Add a player to the table
      *
-     * @param {Player} player - Player to add
+     * @param {string} Id - Id of player to add
      */
-    addPlayer(player: Player): void {
-        this.players.push(player);
+    addPlayer(id: string): void {
+        this.players.push(new Player(id, this.startingChips));
     }
 
     /**
@@ -51,7 +58,7 @@ export default class Table {
     /**
      * Reset the table after a round
      */
-    resetTable(): void {
+    private resetTable(): void {
         this.deck = new Deck(true);
         this.communityCards = [];
         this.pots = [];
@@ -65,7 +72,7 @@ export default class Table {
     /**
      * Deal two cards to all of the players at the table
      */
-    dealCards(): void {
+    private dealCards(): void {
         this.players.forEach(player => {
             player.setHand(new Hand(this.deck.draw(), this.deck.draw()));
         });
@@ -75,7 +82,7 @@ export default class Table {
     /**
      * Reveal the next community cards in the game sequence (i.e. flop, turn, river)
      */
-    revealCards(): void {
+    private revealCards(): void {
         let cardsRevealed: number = this.communityCards.length;
         if (cardsRevealed >= 5) {
             throw new Error('5 cards have already been revealed. The table need to be reset');
@@ -92,3 +99,5 @@ export default class Table {
         }
     }
 }
+
+export default Table;

@@ -1,6 +1,6 @@
-import Hand from './hand';
+import Hand from './hand.js';
 
-export default class Player {
+class Player {
     id: string;
     chips: number;
     hand: Hand | undefined;
@@ -61,3 +61,5 @@ export default class Player {
         return true;
     }
 }
+
+export default Player;

@@ -1,9 +1,11 @@
-import Table from './table';
+import Table from './table.js';
 
-export default class TableManager {
+class TableManager {
     tables: Array<Table>;
 
     constructor() {
         this.tables = [];
     }
 }
+
+export default TableManager;

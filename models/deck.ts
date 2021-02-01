@@ -1,7 +1,7 @@
-import { RANKS, SUITS } from './constants';
-import Card from './card';
+import { RANKS, SUITS } from './constants.js';
+import Card from './card.js';
 
-export default class Deck {
+class Deck {
     private cards: Array<Card>
 
     constructor(shuffle: boolean = true) {
@@ -55,3 +55,5 @@ export default class Deck {
         return this.cards.length;
     }
 }
+
+export default Deck;
