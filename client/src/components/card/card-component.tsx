@@ -12,7 +12,7 @@ class CardComponent extends Component<CardProps> {
         super(props);
     }
 
-    render({ name = 'back', pocketCard = false, display = true }: CardProps) {
+    render({ name = 'blank', pocketCard = false, display = true }: CardProps) {
         let path = `../../assets/${name}.svg`;
         let classes = [style.card];
         if (display === false) classes.push(style.hide);

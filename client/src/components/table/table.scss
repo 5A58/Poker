@@ -14,8 +14,10 @@
 
 .community-cards {
     position: absolute;
-    top: 25%;
+    top: 0;
     left: 0;
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

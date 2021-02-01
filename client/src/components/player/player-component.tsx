@@ -1,6 +1,6 @@
 import { h, Component, Fragment } from 'preact';
 import style from './player.scss';
-import Player from '../../../../models/player';
+import Player from '../../models/player';
 
 type PlayerProps = {
     playerInfo: Player;
@@ -11,7 +11,7 @@ class PlayerComponent extends Component<PlayerProps> {
         super(props);
     }
 
-    private numberWithCommas(x): string {
+    private numberWithCommas(x: number): string {
         return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     }
 
@@ -22,7 +22,7 @@ class PlayerComponent extends Component<PlayerProps> {
         return <div class={classes.join(' ')}>
             <img src="../../assets/avatar.jpg" alt="avatar" class={style.avatar} />
             <div class={style['bank-roll']}>${this.numberWithCommas(this.props.playerInfo.chips)}</div>
-            <div>${this.numberWithCommas(this.props.playerInfo.bet)}</div>
+            <div>${this.numberWithCommas(this.props.playerInfo.amountBet)}</div>
         </div>
     }
 }

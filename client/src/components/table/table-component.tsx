@@ -1,6 +1,6 @@
-import { h, Component, Fragment } from 'preact';
+import { h, Component } from 'preact';
 import style from './table.scss';
-import Table from '../../../../models/table';
+import Table from '../../models/table';
 import CardComponent from '../card/card-component';
 
 type TableProps = {
