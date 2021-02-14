@@ -1,8 +1,8 @@
 import Card from './card';
 
 class Hand {
-    private card1: Card;
-    private card2: Card;
+    card1: Card;
+    card2: Card;
 
     constructor(card1: Card, card2: Card) {
         this.card1 = card1;

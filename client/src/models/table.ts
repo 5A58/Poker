@@ -2,11 +2,11 @@ import Player from './player';
 import Card from './card';
 
 class Table {
-    players: Array<Player>;
+    players: { [id: string]: Player };
     communityCards: Array<Card>;
 
     constructor() {
-        this.players = [];
+        this.players = {};
         this.communityCards = [];
     }
 
@@ -16,8 +16,8 @@ class Table {
      * @param {string} id - Id of player to add
      * @param {number} chips - Number of chips that the player has
      */
-    addPlayer(id: string, chips: number): void {
-        this.players.push(new Player(id, chips));
+    addPlayer(id: string, chips: number, isUser: boolean = false): void {
+        this.players[id] = new Player(id, chips, isUser);
     }
 
     /**
@@ -26,7 +26,7 @@ class Table {
      * @param {string} id - Id of player to remove
      */
     removePlayer(id: string): void {
-        this.players = this.players.filter(p => p.id !== id);
+        delete this.players[id];
     }
 
 

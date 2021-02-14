@@ -1,3 +1,6 @@
+$pocket-card-overlap: -0.2rem;
+$pocket-card-rotation: 0deg;
+
 .card {
     // height: 10%;
     width: 15%;
@@ -10,6 +13,7 @@
 
 .card:hover {
     border: 2px solid lightgray;
+    z-index: 9999;
 }
 
 .back {
@@ -19,6 +23,17 @@
 .card.pocket {
     height: 25rem;
     width: calc(25rem * 0.725);
+    margin-right: 0;
+}
+
+.card.pocket:nth-of-type(1) {
+    rotate: -$pocket-card-rotation;
+    margin-left: $pocket-card-overlap;
+}
+
+.card.pocket:nth-of-type(2) {
+    rotate: $pocket-card-rotation;
+    margin-left: -(2 * $pocket-card-overlap);
 }
 
 .hide {

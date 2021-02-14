@@ -5,6 +5,16 @@ declare namespace PlayerScssNamespace {
     "bank-roll": string;
     inactive: string;
     player: string;
+    "player-1": string;
+    "player-2": string;
+    "player-3": string;
+    "player-4": string;
+    "player-5": string;
+    "player-6": string;
+    "player-7": string;
+    "player-8": string;
+    "player-9": string;
+    user: string;
   }
 }
 

@@ -17,7 +17,7 @@ class App extends Component<{}, AppState> {
         return <div id="app">
             <Router onChange={this.handleRoute}>
                 <Route path="/" component={Home} />
-                <Route path="/:id" component={Game} />
+                <Route path="/:gameId" component={Game} />
             </Router>
         </div>
     }

@@ -26,6 +26,9 @@ class TableComponent extends Component<TableProps> {
             <div class={style['community-cards']}>
                 {cards}
             </div>
+            <div class={style['player-container']}>
+                {this.props.children}
+            </div>
         </div>
     }
 }

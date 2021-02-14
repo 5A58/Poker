@@ -3,6 +3,7 @@ declare namespace TableScssNamespace {
   export interface ITableScss {
     card: string;
     "community-cards": string;
+    "player-container": string;
     table: string;
   }
 }

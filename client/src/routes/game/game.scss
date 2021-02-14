@@ -1,0 +1,17 @@
+@import "../../styles/variables";
+
+.game-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pocket-cards {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: ($player-height + (2 * $player-table-spacing));
+    margin-bottom: $player-table-spacing;
+}

@@ -1,7 +1,9 @@
+@import "../../styles/variables";
+
 .player {
-    position: relative;
-    height: 10rem;
-    width: 10rem;
+    position: absolute;
+    height: $player-height;
+    width: $player-width;
     border-radius: 50%;
     border: 3px solid black;
     overflow: hidden;
@@ -28,4 +30,60 @@
     color: white;
     text-align: center;
     font-weight: bold;
+}
+
+.user {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -($player-height + $table-border-width + $player-table-spacing);
+}
+
+.player-1 {
+    left: 50%;
+    transform: translateX(-50%);
+    top: -($player-height + $table-border-width + $player-table-spacing);
+}
+
+.player-2 {
+    right: 50% - $player-spacing;
+    transform: translateX(50%);
+    top: -($player-height + $table-border-width + $player-table-spacing);
+}
+
+.player-3 {
+    left: 50% - $player-spacing;
+    transform: translateX(-50%);
+    top: -($player-height + $table-border-width + $player-table-spacing);
+}
+
+.player-4 {
+    right: -($player-width + $table-border-width);
+    top: 10%;
+}
+
+.player-5 {
+    left: -($player-width + $table-border-width);
+    top: 10%;
+}
+
+.player-6 {
+    right: -($player-width + $table-border-width);
+    bottom: 10%;
+}
+
+.player-7 {
+    left: -($player-width + $table-border-width);
+    bottom: 10%;
+}
+
+.player-8 {
+    right: 50% - $player-spacing;
+    transform: translateX(50%);
+    bottom: -($player-height + $table-border-width + $player-table-spacing);
+}
+
+.player-9 {
+    left: 50% - $player-spacing;
+    transform: translateX(-50%);
+    bottom: -($player-height + $table-border-width + $player-table-spacing);
 }

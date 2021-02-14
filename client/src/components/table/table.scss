@@ -1,15 +1,17 @@
+@import "../../styles/variables";
+
 .table {
     background: rgb(137, 183, 95);
     background: -moz-radial-gradient(circle, rgba(137, 183, 95, 1) 0%, rgba(55, 98, 67, 1) 100%);
     background: -webkit-radial-gradient(circle, rgba(137, 183, 95, 1) 0%, rgba(55, 98, 67, 1) 100%);
     background: radial-gradient(circle, rgba(137, 183, 95, 1) 0%, rgba(55, 98, 67, 1) 100%);
-    margin: auto;
+    margin: ($player-height * 1.2) auto 0 auto;
     width: 50%;
     /* make height 20% of width */
     padding: 10% 0;
     border-radius: 20rem;
     position: relative;
-    border: 3rem solid #4c2d2b;
+    border: $table-border-width solid #4c2d2b;
 }
 
 .community-cards {
@@ -25,4 +27,12 @@
 
 .community-cards.card {
     flex-shrink: 0;
+}
+
+.player-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
