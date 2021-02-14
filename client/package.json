@@ -9,7 +9,8 @@
   "dependencies": {
     "preact": "^10.5.10",
     "preact-render-to-string": "^5.1.12",
-    "preact-router": "^3.2.1"
+    "preact-router": "^3.2.1",
+    "socket.io-client": "^3.1.1"
   },
   "devDependencies": {
     "@teamsupercell/typings-for-css-modules-loader": "^2.4.0",

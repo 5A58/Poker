@@ -1,4 +1,5 @@
 import { h, Component, Fragment } from 'preact';
+import { io } from "socket.io-client";
 import Player from '../../models/player';
 import Table from '../../models/table';
 import PlayerComponent from '../../components/player/player-component';
@@ -15,6 +16,29 @@ type GameProps = {
 class Game extends Component<GameProps> {
     constructor(props: GameProps) {
         super(props);
+    }
+
+    componentDidMount() {
+        // The server URL will be deduced from the window.location object
+        const socket = io();
+
+        socket.on('connect', () => {
+            // either with send()
+            socket.send('Hello server');
+
+            // or with emit() and custom event names
+            socket.emit('salutations', 'Hello!', { 'mr': 'john' }, Uint8Array.from([1, 2, 3, 4]));
+        });
+
+        // handle the event sent with socket.send()
+        socket.on('message', (data: any) => {
+            console.log(data);
+        });
+
+        // handle the event sent with socket.emit()
+        socket.on('greetings', (elem1: any, elem2: any, elem3: any) => {
+            console.log(elem1, elem2, elem3);
+        })
     }
 
     render() {
