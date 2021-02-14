@@ -7,6 +7,7 @@
     "dev": "preact watch"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "preact": "^10.5.10",
     "preact-render-to-string": "^5.1.12",
     "preact-router": "^3.2.1",

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import Deck from '../../dist/models/deck.js';
+import Deck from '../../../dist/models/deck.js';
 
 describe('Deck', () => {
     describe('count', () => {

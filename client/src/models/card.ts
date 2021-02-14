@@ -1,4 +1,4 @@
-import { RANKTONAME, SUITTONAME } from "../../../models/constants";
+import { RANKTONAME, SUITTONAME } from "../../../server/models/constants";
 
 class Card {
     value: number;

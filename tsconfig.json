@@ -12,14 +12,14 @@
     // "sourceMap": true,                     /* Generates corresponding '.map' file. */
     // "outFile": "./",                       /* Concatenate and emit output to single file. */
     "outDir": "./dist",
-    "rootDir": "./",
+    "rootDir": "./server",
     "removeComments": true,
     // "isolatedModules": true,               /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
     "noEmitOnError": true,
     /* Strict Type-Checking Options */
     "strict": true, /* Enable all strict type-checking options. */
     /* Module Resolution Options */
-    // "moduleResolution": "node",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+    "moduleResolution": "node",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
     "esModuleInterop": true,
     /* Advanced Options */
     "skipLibCheck": true,
@@ -28,7 +28,5 @@
   "exclude": [
     "node_modules"
   ],
-  "include": [
-    "models"
-  ]
+  "include": ["server"]
 }

@@ -1,6 +1,6 @@
 import chai from 'chai';
-import Hand from '../../dist/models/hand.js';
-import Card from '../../dist/models/card.js';
+import Hand from '../../../dist/models/hand.js';
+import Card from '../../../dist/models/card.js';
 const assert = chai.assert;
 
 describe('Hand', () => {
