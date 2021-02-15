@@ -15,6 +15,7 @@ class Table {
     deck: Deck;
     players: { [playerId: string]: Player };
     communityCards: Array<Card>;
+    gameStarted: boolean;
     startingChips: number;
     bigBlind: number;
     smallBlind: number;
@@ -23,6 +24,7 @@ class Table {
         this.players = {};
         this.deck = new Deck(true);
         this.communityCards = [];
+        this.gameStarted = false;
         // Hardcoding until settings are implemented
         this.startingChips = 100;
         this.bigBlind = Math.round(this.startingChips / 50);
@@ -36,7 +38,7 @@ class Table {
      * @return {(Player | undefined)} - Player object if player is added, else undefined
      */
     addPlayer(id: string): Player | undefined {
-        if (Object.keys(this.players).length < MAXPLAYERS && this.players[id] === undefined) {
+        if (this.playerCount() < MAXPLAYERS && this.players[id] === undefined) {
             let player = new Player(id, this.startingChips);
             this.players[id] = player;
             return player;
@@ -84,6 +86,22 @@ class Table {
             bigBlind: this.bigBlind,
             smallBlind: this.smallBlind
         };
+    }
+
+
+    /**
+     * Get the number fo playres at the table
+     *
+     * @return {number} - Number of players at the table
+     */
+    playerCount(): number {
+        return Object.keys(this.players).length;
+    }
+
+    incrementGameClock(): void {
+        if (!this.gameStarted) {
+            this.dealCards();
+        }
     }
 
     /**

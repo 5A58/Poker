@@ -22,15 +22,11 @@ class Game extends Component<GameProps, GameState> {
     }
 
     componentDidMount() {
-        // The server URL will be deduced from the window.location object
-        const socket = io();
-
-        let path = window.location.pathname;
-        path = path[0] == '/' ? path.substr(1) : path;
+        const socket = io('/' + this.props.gameId);
 
         socket.on('connect', () => {
             this.setState({ socketId: socket.id });
-            socket.emit('join table', path)
+            socket.emit('join table');
         });
 
         socket.on('add player', (player: Player) => {
@@ -53,6 +49,11 @@ class Game extends Component<GameProps, GameState> {
 
         socket.on('initialize table', (tableInfo: RedactedTableInfo) => {
             this.setState({ table: tableInfo });
+        });
+
+        socket.on('table full', () => {
+            // TODO: Add proper handling
+            console.log('Unable to join table. Maximum capacity reached.')
         });
     }
 

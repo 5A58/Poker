@@ -2,8 +2,11 @@ import Player from './player.js';
 import { default as Table, RedactedTableInfo } from './table.js';
 
 class TableManager {
-    private playerToTableId: { [playerId: string]: string };
     private tables: { [id: string]: Table };
+
+    constructor() {
+        this.tables = {};
+    }
 
     /**
      * Add a new player to a table (create the table if it does not exist)
@@ -20,38 +23,42 @@ class TableManager {
         }
 
         // Add the player to the table
-        let player = this.tables[tableId]?.addPlayer(playerId);
-        if (player !== undefined) {
-            this.playerToTableId[playerId] = tableId;
-        }
-        return player;
+        return this.tables[tableId]?.addPlayer(playerId);
     }
 
     /**
      * Remove player from their table (delete the table if it is empty)
      *
+     * @param {string} tableId- Id of table
      * @param {string} playerId- Id of player
-     * @return {string} - Return Id of table that the player was removed from
+     * @return {boolean} - True if the player was successfully found and removed
      */
-    removePlayerFromTable(playerId: string): string | undefined {
-        let tableId: string | undefined = this.playerToTableId[playerId];
-        if (tableId === undefined) {
-            return undefined;
-        }
-        delete this.playerToTableId[playerId];
-
+    removePlayerFromTable(tableId: string, playerId: string): boolean {
         let table: Table | undefined = this.tables[tableId];
         if (table === undefined) {
-            return undefined;
+            return false;
         }
 
         console.log(`Removing player ${playerId} from table ${tableId}`);
         table.removePlayer(playerId);
-        if (Object.keys(table.players).length === 0) {
+        if (table.playerCount() === 0) {
             delete this.tables[tableId];
             console.log(`Deleting table ${tableId} because it is empty`);
         }
-        return tableId;
+        return true;
+    }
+
+
+    /**
+     * Increment the game clock of a given table
+     *
+     * @param {string} tableId - Id of table
+     */
+    incrementGameClock(tableId: string): void {
+        let table = this.tables[tableId];
+        if (table !== undefined) {
+            return table.incrementGameClock();
+        }
     }
 
     /**
@@ -62,11 +69,6 @@ class TableManager {
      */
     getTableInfo(tableId: string): RedactedTableInfo {
         return this.tables[tableId].toJSON();
-    }
-
-    constructor() {
-        this.tables = {};
-        this.playerToTableId = {};
     }
 }
 

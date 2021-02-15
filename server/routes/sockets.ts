@@ -6,25 +6,28 @@ function initializeSockets(server: HttpServer, tableManager: TableManager) {
     const io: socketIO.Server = new socketIO.Server(server);
     io.serveClient(false);
 
-    io.on('connection', socket => {
-        console.log(socket.id + ' Connected');
+    const parentNamespace: socketIO.Namespace = io.of(/^\/[a-zA-Z0-9-]*$/);
+    parentNamespace.on('connection', socket => {
+        let namespaceName: string = socket.nsp.name;
+        console.log(`${socket.id} connected to namespace ${namespaceName}`);
+        namespaceName = namespaceName[0] == '/' ? namespaceName.substr(1) : namespaceName;
 
-        socket.on('join table', (tableId: string) => {
-            console.log(socket.id + ` is joining table ${tableId}`);
-            socket.join(tableId);
-            let player = tableManager.addPlayerToTable(socket.id, tableId);
+        socket.on('join table', () => {
+            console.log(`${socket.id} is joining table ${namespaceName}`);
+            let player = tableManager.addPlayerToTable(socket.id, namespaceName);
             if (player !== undefined) {
-                socket.to(tableId).emit('add player', player);
-                socket.emit('initialize table', tableManager.getTableInfo(tableId))
+                socket.broadcast.emit('add player', player);
+                socket.emit('initialize table', tableManager.getTableInfo(namespaceName))
             }
-            // Handle failure
+            else {
+                socket.emit('table full');
+            }
         });
 
         socket.on('disconnect', () => {
-            console.log(socket.id + ' Disconnected');
-            let tableId = tableManager.removePlayerFromTable(socket.id);
-            if (tableId !== undefined) {
-                socket.to(tableId).emit('remove player', socket.id);
+            console.log(`${socket.id} disconnected from namespace ${namespaceName}`);
+            if (tableManager.removePlayerFromTable(namespaceName, socket.id)) {
+                socket.broadcast.emit('remove player', socket.id);
             }
         });
     });
