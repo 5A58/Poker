@@ -1,3 +1,4 @@
+import Card from './card.js';
 import Hand from './hand.js';
 
 class Player {
@@ -59,6 +60,19 @@ class Player {
         }
         this.chips -= chips;
         return true;
+    }
+
+
+    /**
+     * Get redacted player info
+     *
+     * @return {Player} - Redacted player info
+     */
+    toJSON(): Player {
+        let temp = new Player(this.id, this.chips);
+        temp.hand = this.hand === undefined ? this.hand : new Hand(new Card(0, 0), new Card(0, 0));
+        temp.amountBet = this.amountBet;
+        return temp;
     }
 }
 

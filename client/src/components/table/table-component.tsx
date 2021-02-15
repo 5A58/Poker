@@ -1,10 +1,10 @@
 import { h, Component } from 'preact';
 import style from './table.scss';
-import Table from '../../models/table';
 import CardComponent from '../card/card-component';
+import { RedactedTableInfo } from '../../../../server/models/table';
 
 type TableProps = {
-    tableInfo: Table;
+    tableInfo: RedactedTableInfo;
 };
 
 class TableComponent extends Component<TableProps> {
@@ -13,9 +13,9 @@ class TableComponent extends Component<TableProps> {
     }
 
     render() {
-        let cards = this.props.tableInfo.communityCards.map(card => {
+        let cards = this.props.tableInfo?.communityCards.map(card => {
             return <CardComponent name={card.getShortName()} />
-        });
+        }) ?? [];
 
         for (let i = cards.length; i < 5; i++) {
             let placeholder = <CardComponent display={false} />;

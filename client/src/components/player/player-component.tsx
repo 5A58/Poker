@@ -1,10 +1,11 @@
 import { h, Component, Fragment } from 'preact';
 import style from './player.scss';
-import Player from '../../models/player';
+import Player from '../../../../server/models/player';
 
 type PlayerProps = {
     playerInfo: Player;
     index: number | undefined;
+    isUser: boolean;
 };
 
 class PlayerComponent extends Component<PlayerProps> {
@@ -47,9 +48,11 @@ class PlayerComponent extends Component<PlayerProps> {
     }
 
     render() {
+        const { playerInfo, isUser } = this.props;
+
         let classes = [style.player];
-        this.props.playerInfo.isUser ? classes.push(style.user) : classes.push(this.getStyleForIndex());
-        if (this.props.playerInfo.hand === undefined) classes.push(style.inactive);
+        isUser ? classes.push(style.user) : classes.push(this.getStyleForIndex());
+        if (playerInfo.hand === undefined) classes.push(style.inactive);
 
         return <div class={classes.join(' ')}>
             <img src="../../assets/avatar.jpg" alt="avatar" class={style.avatar} />

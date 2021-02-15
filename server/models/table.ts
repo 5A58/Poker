@@ -2,21 +2,27 @@ import Deck from './deck.js';
 import Player from './player.js';
 import Card from './card.js';
 import Hand from './hand.js';
+import { MAXPLAYERS } from './constants.js';
+
+type RedactedTableInfo = {
+    players: { [playerId: string]: Player };
+    communityCards: Array<Card>;
+    bigBlind: number;
+    smallBlind: number;
+};
 
 class Table {
     deck: Deck;
-    players: Array<Player>;
+    players: { [playerId: string]: Player };
     communityCards: Array<Card>;
-    pots: Array<number>;
     startingChips: number;
     bigBlind: number;
     smallBlind: number;
 
     constructor() {
-        this.players = [];
+        this.players = {};
         this.deck = new Deck(true);
         this.communityCards = [];
-        this.pots = [];
         // Hardcoding until settings are implemented
         this.startingChips = 100;
         this.bigBlind = Math.round(this.startingChips / 50);
@@ -27,9 +33,15 @@ class Table {
      * Add a player to the table
      *
      * @param {string} Id - Id of player to add
+     * @return {(Player | undefined)} - Player object if player is added, else undefined
      */
-    addPlayer(id: string): void {
-        this.players.push(new Player(id, this.startingChips));
+    addPlayer(id: string): Player | undefined {
+        if (Object.keys(this.players).length < MAXPLAYERS && this.players[id] === undefined) {
+            let player = new Player(id, this.startingChips);
+            this.players[id] = player;
+            return player;
+        }
+        return undefined;
     }
 
     /**
@@ -38,7 +50,7 @@ class Table {
      * @param {string} id - Id of player to remove
      */
     removePlayer(id: string): void {
-        this.players = this.players.filter(p => p.id !== id);
+        delete this.players[id];
     }
 
     /**
@@ -48,11 +60,30 @@ class Table {
      * @param {number} amount - Number of chips bet
      */
     placeBet(playerId: string, amount: number) {
-        let player: Player = this.players.filter(p => p.id === playerId)[0];
-        if (!player.removeChips(amount)) {
+        let player: Player = this.players[playerId];
+        if (!player?.removeChips(amount)) {
+            // Player does not exist or front-end validation was bypassed
             player.foldHand();
-            throw new Error(`Player ${playerId} cannot bet ${amount} with only ${player.getChipCount()} chips`);
+            console.log(`Player ${playerId} cannot bet ${amount} with only ${player.getChipCount()} chips`);
         }
+    }
+
+    /**
+     * Get redacted player info
+     *
+     * @return {RedactedTableInfo} - Redacted table info
+     */
+    toJSON(): RedactedTableInfo {
+        let redactedPlayerInfo: { [playerId: string]: Player } = {};
+        for (let playerId in this.players) {
+            redactedPlayerInfo[playerId] = this.players[playerId].toJSON();
+        }
+        return {
+            players: redactedPlayerInfo,
+            communityCards: this.communityCards,
+            bigBlind: this.bigBlind,
+            smallBlind: this.smallBlind
+        };
     }
 
     /**
@@ -61,8 +92,7 @@ class Table {
     private resetTable(): void {
         this.deck = new Deck(true);
         this.communityCards = [];
-        this.pots = [];
-        this.players.forEach(player => {
+        this.forEachPlayer(player => {
             player.foldHand();
             player.amountBet = 0;
         });
@@ -73,8 +103,8 @@ class Table {
      * Deal two cards to all of the players at the table
      */
     private dealCards(): void {
-        this.players.forEach(player => {
-            player.setHand(new Hand(this.deck.draw(), this.deck.draw()));
+        this.forEachPlayer(player => {
+            player.setHand(new Hand(this.deck.draw(), this.deck.draw()))
         });
     }
 
@@ -98,6 +128,19 @@ class Table {
             }
         }
     }
+
+
+    /**
+     * Perform an operation on each player at the table
+     *
+     * @param {(value: Player) => void} callbackfn - Function to perform operation on a player
+     */
+    private forEachPlayer(callbackfn: (value: Player) => void): void {
+        Object.keys(this.players).forEach(playerId => {
+            let player: Player = this.players[playerId];
+            callbackfn(player);
+        });
+    }
 }
 
-export default Table;
+export { Table as default, RedactedTableInfo };

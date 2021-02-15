@@ -1,8 +1,8 @@
 import Card from './card.js';
 
 class Hand {
-    private card1: Card;
-    private card2: Card;
+    readonly card1: Card;
+    readonly card2: Card;
 
     constructor(card1: Card, card2: Card) {
         // Sort cards in descending order
