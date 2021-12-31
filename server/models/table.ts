@@ -9,6 +9,7 @@ type RedactedTableInfo = {
     communityCards: Array<Card>;
     bigBlind: number;
     smallBlind: number;
+    gameStarted: boolean;
 };
 
 class Table {
@@ -84,7 +85,8 @@ class Table {
             players: redactedPlayerInfo,
             communityCards: this.communityCards,
             bigBlind: this.bigBlind,
-            smallBlind: this.smallBlind
+            smallBlind: this.smallBlind,
+            gameStarted: this.gameStarted
         };
     }
 

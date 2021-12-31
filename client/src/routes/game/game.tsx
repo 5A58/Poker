@@ -6,6 +6,8 @@ import PlayerComponent from '../../components/player/player-component';
 import TableComponent from '../../components/table/table-component';
 import CardComponent from '../../components/card/card-component';
 import style from './game.scss';
+import Hand from '../../../../server/models/hand';
+import Card from '../../../../server/models/card';
 
 type GameProps = {
     gameId: string;
@@ -74,16 +76,25 @@ class Game extends Component<GameProps, GameState> {
         }
 
         return <div class={style['game-container']}>
-            <div>This is the page for Game {this.props.gameId}</div>
             <TableComponent tableInfo={table}>
                 {otherPlayers.map((player, index) => {
                     return <PlayerComponent playerInfo={player} index={index + 1} isUser={false} />
                 })}
                 {user && <PlayerComponent playerInfo={user} index={undefined} isUser={true} />}
             </TableComponent>
-            <div class={style['pocket-cards']}>
-                {user?.hand?.card1 && <CardComponent name={user?.hand?.card1.getShortName()} pocketCard={true} />}
-                {user?.hand?.card2 && <CardComponent name={user?.hand?.card2.getShortName()} pocketCard={true} />}
+            <div class={style.footer}>
+                <div class={[style['control-panel'], style.left].join(' ')}>
+                    <div class={style.control}>Start Game</div>
+                </div>
+                <div class={style['pocket-cards']}>
+                    {<CardComponent name={"JS"} pocketCard={true} />}
+                    {<CardComponent name={"10H"} pocketCard={true} />}
+                    {/* {user?.hand?.card1 && <CardComponent name={user?.hand?.card1.getShortName()} pocketCard={true} />}
+                    {user?.hand?.card2 && <CardComponent name={user?.hand?.card2.getShortName()} pocketCard={true} />} */}
+                </div>
+                <div class={[style['control-panel'], style.right].join(' ')}>
+                    <div class={style.control}>Place Bid</div>
+                </div>
             </div>
         </div>;
     }

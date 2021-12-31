@@ -1,3 +1,6 @@
+@import './variables';
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+
 *,
 *::before,
 *::after {
@@ -14,11 +17,12 @@ html {
 }
 
 body {
-    background-color: lightsteelblue;
+    background-color: $app-background-color;
 }
 
 #app {
     position: fixed;
     height: 100%;
     width: 100%;
+    font-family: 'Roboto Condensed', sans-serif;
 }

@@ -7,11 +7,43 @@
     flex-direction: column;
 }
 
-.pocket-cards {
+.footer {
     flex-grow: 1;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-end;
     margin-top: ($player-height + (2 * $player-table-spacing));
     margin-bottom: $player-table-spacing;
+}
+
+.pocket-cards {
+    background-color: violet;
+}
+
+.control-panel {}
+
+.control-panel.left {
+    // background-color: coral;
+}
+
+.control-panel.right {
+    // background-color: yellowgreen;
+}
+
+.control {
+    border: 2px solid $button-color;
+    color: $button-font-color;
+    background-color: $button-color;
+    padding: 1.5rem;
+    // border-radius: 0.1rem;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+.control:hover {
+    border: 2px solid $button-secondary-color;
 }
